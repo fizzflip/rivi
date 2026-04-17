@@ -80,7 +80,7 @@
 #page(header: none, footer: none)[
   #v(15%)
   #align(center)[
-    #text(12pt, weight: "light", tracking: 2pt)[ANDROID DEVELOPMENT SERIES]
+    #text(12pt, weight: "light", tracking: 2pt)[MOBILE APPLICATION DEVELOPMENT]
     #v(10pt)
     #line(length: 40%, stroke: 0.5pt + secondary-color)
     #v(20pt)
@@ -100,8 +100,10 @@
             columns: (1fr, 2fr),
             row-gutter: 10pt,
             text(8pt, fill: secondary-color)[STUDENT], text(9pt, weight: "semibold")[Student Name],
-            text(8pt, fill: secondary-color)[ASSIGNMENT],
-            text(9pt, weight: "semibold")[03: Multi-Activity Architecture],
+            text(8pt, fill: secondary-color)[ALA - III], text(9pt, weight: "semibold")[Multi-Activity Application],
+
+            text(8pt, fill: secondary-color)[REPOSITORY],
+            link("https://github.com/fizzflip/rivi")[#text(9pt, weight: "semibold")[github.com/fizzflip/rivi]],
           )
         ]
       ],

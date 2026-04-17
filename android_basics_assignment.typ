@@ -81,7 +81,7 @@
 #page(header: none, footer: none)[
   #v(15%)
   #align(center)[
-    #text(12pt, weight: "light", tracking: 2pt)[ANDROID DEVELOPMENT SERIES]
+    #text(12pt, weight: "light", tracking: 2pt)[MOBILE APPLICATION DEVELOPMENT]
     #v(10pt)
     #line(length: 40%, stroke: 0.5pt + secondary-color)
     #v(20pt)
@@ -101,7 +101,9 @@
             columns: (1fr, 2fr),
             row-gutter: 10pt,
             text(8pt, fill: secondary-color)[STUDENT], text(9pt, weight: "semibold")[Student Name],
-            text(8pt, fill: secondary-color)[ASSIGNMENT], text(9pt, weight: "semibold")[01: Architecture Basics],
+            text(8pt, fill: secondary-color)[ALA - I], text(9pt, weight: "semibold")[Basics of Android Architecture],
+            text(8pt, fill: secondary-color)[REPOSITORY],
+            link("https://github.com/fizzflip/rivi")[#text(9pt, weight: "semibold")[github.com/fizzflip/rivi]],
           )
         ]
       ],
@@ -144,8 +146,8 @@ The OS and individual applications routinely dispatch system-wide events. A `Bro
 Due to Android's strict process isolation, one application cannot access the file directory of another. *Content Providers* mitigate this by acting as a secure interface exposing structured data across the IPC (Inter-Process Communication) boundary via standardized URIs.
 
 #pagebreak()
-= Structural Architecture Outline: The Rivi Application
-
+= Structural Architecture Outline: \ The Rivi Application
+\
 To visually demonstrate these core primitives interacting within a cohesive environment, we utilize the *Rivi* application—a distraction-free, spaced-repetition microlearning platform.
 
 #v(20pt)
@@ -217,7 +219,7 @@ To visually demonstrate these core primitives interacting within a cohesive envi
     style: "italic",
   )[Figure 1: Hierarchical Architecture Overview of Rivi]
 ]
-
+#pagebreak()
 == Diagram Component Analysis
 
 - *User Interface Layer:* The entry point for user interaction, consisting of various Activities mapped to specific microlearning workflows.
