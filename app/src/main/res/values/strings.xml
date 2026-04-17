@@ -18,6 +18,6 @@
     <string name="manage_cards">Manage Cards</string>
     <string name="delete_card">Delete Card</string>
     <string name="recap_title">Session Complete</string>
-    <string name="recap_subtitle">You\'ve mastered 5 more concepts today.</string>
+    <string name="recap_subtitle">You have mastered %d concepts today.</string>
     <string name="back_to_dashboard">Back to Dashboard</string>
 </resources>

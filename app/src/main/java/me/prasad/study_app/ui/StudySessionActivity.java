@@ -104,6 +104,9 @@ public class StudySessionActivity extends AppCompatActivity {
         flashcardViewModel.getIsSessionComplete().observe(this, isComplete -> {
             if (isComplete) {
                 Intent intent = new Intent(this, SessionRecapActivity.class);
+                if (sessionCards != null) {
+                    intent.putExtra("mastered_count", sessionCards.size());
+                }
                 startActivity(intent);
                 finish();
             }
