@@ -2,13 +2,27 @@ package me.prasad.study_app;
 
 import android.os.Bundle;
 
+import android.content.Intent;
+import android.app.DatePickerDialog;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import me.prasad.study_app.data.entity.Subject;
 import me.prasad.study_app.ui.adapter.SubjectAdapter;
 import me.prasad.study_app.viewmodel.SubjectViewModel;
 
@@ -16,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SubjectViewModel viewModel;
     private SubjectAdapter adapter;
+    private Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +45,45 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ExtendedFloatingActionButton fab = findViewById(R.id.fab_add_subject);
-        fab.setOnClickListener(v -> {
-            // TODO: Implement Add Subject Dialog
+        fab.setOnClickListener(v -> showAddSubjectDialog());
+    }
+
+    private void showAddSubjectDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_add_subject, null);
+        TextInputEditText nameInput = view.findViewById(R.id.edit_subject_name);
+        TextInputEditText dateInput = view.findViewById(R.id.edit_exam_date);
+        MaterialButton btnSave = view.findViewById(R.id.btn_save);
+        MaterialButton btnCancel = view.findViewById(R.id.btn_cancel);
+
+        AlertDialog dialog = new AlertDialog.Builder(this, R.style.Theme_MaterialComponents_DayNight_Dialog_MinWidth)
+                .setView(view)
+                .create();
+
+        dateInput.setOnClickListener(v -> {
+            new DatePickerDialog(this, (view1, year, month, dayOfMonth) -> {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
+                dateInput.setText(sdf.format(calendar.getTime()));
+            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
         });
+
+        btnSave.setOnClickListener(v -> {
+            String name = nameInput.getText().toString().trim();
+            if (name.isEmpty() || dateInput.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Subject subject = new Subject(name, calendar.getTimeInMillis(), 0);
+            viewModel.insert(subject);
+            dialog.dismiss();
+        });
+
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 
     private void setupRecyclerView() {
@@ -42,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         adapter.setOnSubjectClickListener(subject -> {
-            // TODO: Navigate to Study Session or Subject Details
+            Intent intent = new Intent(this, StudySessionActivity.class);
+            intent.putExtra(StudySessionActivity.EXTRA_SUBJECT_ID, subject.getSubjectId());
+            startActivity(intent);
         });
     }
 }

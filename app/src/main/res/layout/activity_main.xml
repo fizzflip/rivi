@@ -11,7 +11,7 @@
         android:id="@+id/text_app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rivi"
+        android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.Rivi.Academic"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -22,7 +22,7 @@
         android:id="@+id/text_app_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5 questions. Every day."
+        android:text="@string/app_subtitle"
         android:textAppearance="@style/TextAppearance.Rivi.UI"
         android:textColor="@color/rivi_text_secondary"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +33,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
+        android:clipToPadding="false"
+        android:paddingBottom="88dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,13 +45,13 @@
         android:id="@+id/fab_add_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="New Subject"
+        android:text="@string/new_subject"
         android:textColor="@color/white"
         app:backgroundTint="@color/black"
         app:icon="@android:drawable/ic_input_add"
         app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
