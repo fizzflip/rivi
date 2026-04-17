@@ -36,6 +36,10 @@ public class RiviRepository {
         return riviDao.getSubjectById(subjectId);
     }
 
+    public LiveData<Integer> getDueCountForSubject(int subjectId, long todayTimestamp) {
+        return riviDao.getDueCountForSubject(subjectId, todayTimestamp);
+    }
+
     public void insertSubject(Subject subject) {
         RiviDatabase.databaseWriteExecutor.execute(() -> {
             riviDao.insertSubject(subject);

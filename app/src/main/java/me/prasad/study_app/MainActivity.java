@@ -88,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
     private void setupRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recycler_subjects);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new SubjectAdapter();
+        
+        // Pass ViewModel to adapter to fetch due counts
+        adapter = new SubjectAdapter(new ViewModelProvider(this).get(SubjectViewModel.class), this);
         recyclerView.setAdapter(adapter);
 
         adapter.setOnSubjectClickListener(new SubjectAdapter.OnSubjectClickListener() {

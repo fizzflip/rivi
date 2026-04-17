@@ -53,6 +53,15 @@ public class CardManagementActivity extends AppCompatActivity {
         adapter = new FlashcardAdapter();
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnCardDeleteListener(card -> {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.delete_card)
+                    .setMessage("Are you sure you want to delete this card?")
+                    .setPositiveButton("Delete", (dialog, which) -> viewModel.deleteFlashcard(card))
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        });
+
         FloatingActionButton fab = findViewById(R.id.fab_add_card);
         fab.setOnClickListener(v -> showAddCardDialog());
     }

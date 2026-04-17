@@ -33,6 +33,10 @@ public class SubjectViewModel extends AndroidViewModel {
         return repository.getSubjectById(subjectId);
     }
 
+    public LiveData<Integer> getDueCount(int subjectId) {
+        return repository.getDueCountForSubject(subjectId, System.currentTimeMillis());
+    }
+
     public void insert(Subject subject) {
         repository.insertSubject(subject);
     }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Rivi</string>
-    <string name="app_subtitle">5 questions. Every day.</string>
+    <string name="app_subtitle">Questions. Every day.</string>
     <string name="new_subject">New Subject</string>
     <string name="add_subject_title">Add New Subject</string>
     <string name="subject_name_hint">Subject Name (e.g., Biology)</string>
@@ -16,4 +16,8 @@
     <string name="answer_hint">Answer</string>
     <string name="no_cards_message">No cards in this subject. Add some to start studying!</string>
     <string name="manage_cards">Manage Cards</string>
+    <string name="delete_card">Delete Card</string>
+    <string name="recap_title">Session Complete</string>
+    <string name="recap_subtitle">You\'ve mastered 5 more concepts today.</string>
+    <string name="back_to_dashboard">Back to Dashboard</string>
 </resources>

@@ -6,30 +6,47 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/text_question"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:textAppearance="@style/TextAppearance.Rivi.Academic"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/btn_delete_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Question text goes here?" />
 
         <TextView
             android:id="@+id/text_answer"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.Rivi.UI"
             android:textColor="@color/rivi_text_secondary"
             android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/text_question"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_question"
             tools:text="The answer explanation." />
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/btn_delete_card"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Delete card"
+            android:src="@android:drawable/ic_menu_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/rivi_text_secondary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

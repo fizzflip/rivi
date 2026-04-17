@@ -76,4 +76,8 @@ public class FlashcardViewModel extends AndroidViewModel {
     public void insertFlashcard(Flashcard card) {
         repository.insertFlashcard(card);
     }
+
+    public void deleteFlashcard(Flashcard card) {
+        repository.deleteFlashcard(card);
+    }
 }

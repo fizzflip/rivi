@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 
 import me.prasad.study_app.R;
 import me.prasad.study_app.data.entity.Subject;
+
+import me.prasad.study_app.viewmodel.SubjectViewModel;
 
 public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectViewHolder> {
 
@@ -32,10 +35,15 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
                     oldItem.getCurrentStreak() == newItem.getCurrentStreak();
         }
     };
+
+    private final SubjectViewModel viewModel;
+    private final LifecycleOwner lifecycleOwner;
     private OnSubjectClickListener listener;
 
-    public SubjectAdapter() {
+    public SubjectAdapter(SubjectViewModel viewModel, LifecycleOwner lifecycleOwner) {
         super(DIFF_CALLBACK);
+        this.viewModel = viewModel;
+        this.lifecycleOwner = lifecycleOwner;
     }
 
     @NonNull
@@ -96,10 +104,11 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
             nameText.setText(subject.getName());
             streakText.setText(itemView.getContext().getString(R.string.streak_format, subject.getCurrentStreak()));
 
-            // Logic for "cards due" would ideally come from the DAO/ViewModel
-            // For now, we'll placeholder it or let the Activity handle it if needed.
-            // In a full implementation, we might use a Wrapper object for Subject + DueCount.
-            cardsDueText.setText(itemView.getContext().getString(R.string.cards_due_format, 5));
+            // Bind the actual due count from the ViewModel
+            viewModel.getDueCount(subject.getSubjectId()).observe(lifecycleOwner, count -> {
+                int displayCount = Math.min(count != null ? count : 0, 5);
+                cardsDueText.setText(itemView.getContext().getString(R.string.cards_due_format, displayCount));
+            });
 
             // Calculate progress towards exam (simplified)
             long now = System.currentTimeMillis();
