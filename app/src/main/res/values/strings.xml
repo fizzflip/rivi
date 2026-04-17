@@ -22,4 +22,8 @@
     <string name="recap_title">Session Complete</string>
     <string name="recap_subtitle">You have mastered %d concepts today.</string>
     <string name="back_to_dashboard">Back to Dashboard</string>
+    <string name="easy">Easy</string>
+    <string name="good">Good</string>
+    <string name="hard">Hard</string>
+    <string name="again">Again</string>
 </resources>

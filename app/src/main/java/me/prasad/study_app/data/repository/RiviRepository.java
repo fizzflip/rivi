@@ -4,6 +4,8 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import com.google.gson.Gson;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -12,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
 import me.prasad.study_app.data.RiviDatabase;
 import me.prasad.study_app.data.dao.RiviDao;
 import me.prasad.study_app.data.dto.FlashcardDto;
@@ -51,21 +52,15 @@ public class RiviRepository {
     }
 
     public void insertSubject(Subject subject) {
-        RiviDatabase.databaseWriteExecutor.execute(() -> {
-            riviDao.insertSubject(subject);
-        });
+        RiviDatabase.databaseWriteExecutor.execute(() -> riviDao.insertSubject(subject));
     }
 
     public void updateSubject(Subject subject) {
-        RiviDatabase.databaseWriteExecutor.execute(() -> {
-            riviDao.updateSubject(subject);
-        });
+        RiviDatabase.databaseWriteExecutor.execute(() -> riviDao.updateSubject(subject));
     }
 
     public void deleteSubject(Subject subject) {
-        RiviDatabase.databaseWriteExecutor.execute(() -> {
-            riviDao.deleteSubject(subject);
-        });
+        RiviDatabase.databaseWriteExecutor.execute(() -> riviDao.deleteSubject(subject));
     }
 
     // --- Flashcard Operations ---
@@ -75,21 +70,15 @@ public class RiviRepository {
     }
 
     public void insertFlashcard(Flashcard flashcard) {
-        RiviDatabase.databaseWriteExecutor.execute(() -> {
-            riviDao.insertFlashcard(flashcard);
-        });
+        RiviDatabase.databaseWriteExecutor.execute(() -> riviDao.insertFlashcard(flashcard));
     }
 
     public void updateFlashcard(Flashcard flashcard) {
-        RiviDatabase.databaseWriteExecutor.execute(() -> {
-            riviDao.updateFlashcard(flashcard);
-        });
+        RiviDatabase.databaseWriteExecutor.execute(() -> riviDao.updateFlashcard(flashcard));
     }
 
     public void deleteFlashcard(Flashcard flashcard) {
-        RiviDatabase.databaseWriteExecutor.execute(() -> {
-            riviDao.deleteFlashcard(flashcard);
-        });
+        RiviDatabase.databaseWriteExecutor.execute(() -> riviDao.deleteFlashcard(flashcard));
     }
 
     /**

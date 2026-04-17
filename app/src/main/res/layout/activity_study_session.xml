@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Tap to flip"
+                android:text="@string/tap_to_flip"
                 android:textAppearance="@style/TextAppearance.Rivi.UI"
                 android:textColor="@color/rivi_stroke"
                 android:textSize="12sp" />
@@ -87,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Again"
+            android:text="@string/again"
             android:textColor="#F44336"
             app:strokeColor="#F44336" />
 
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="Hard"
+            android:text="@string/hard"
             android:textColor="#FF9800"
             app:strokeColor="#FF9800" />
 
@@ -110,7 +110,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:backgroundTint="#4CAF50"
-            android:text="Good"
+            android:text="@string/good"
             app:rippleColor="#20FFFFFF" />
 
         <com.google.android.material.button.MaterialButton
@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="Easy"
+            android:text="@string/easy"
             android:textColor="#2196F3"
             app:strokeColor="#2196F3" />
 

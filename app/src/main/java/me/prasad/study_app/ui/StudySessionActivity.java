@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,12 +28,10 @@ public class StudySessionActivity extends AppCompatActivity {
     public static final String EXTRA_SUBJECT_ID = "extra_subject_id";
 
     private FlashcardViewModel flashcardViewModel;
-    private SubjectViewModel subjectViewModel;
 
     private TextView textSubjectTitle, textSessionProgress, textCardContent;
     private MaterialCardView cardFlashcard;
     private LinearLayout layoutGrading;
-    private MaterialButton btnAgain, btnHard, btnGood, btnEasy;
 
     private List<Flashcard> sessionCards;
     private Subject currentSubject;
@@ -62,10 +59,10 @@ public class StudySessionActivity extends AppCompatActivity {
         cardFlashcard = findViewById(R.id.card_flashcard);
         layoutGrading = findViewById(R.id.layout_grading);
 
-        btnAgain = findViewById(R.id.btn_again);
-        btnHard = findViewById(R.id.btn_hard);
-        btnGood = findViewById(R.id.btn_good);
-        btnEasy = findViewById(R.id.btn_easy);
+        MaterialButton btnAgain = findViewById(R.id.btn_again);
+        MaterialButton btnHard = findViewById(R.id.btn_hard);
+        MaterialButton btnGood = findViewById(R.id.btn_good);
+        MaterialButton btnEasy = findViewById(R.id.btn_easy);
 
         cardFlashcard.setOnClickListener(v -> flipCard());
 
@@ -76,7 +73,7 @@ public class StudySessionActivity extends AppCompatActivity {
     }
 
     private void setupViewModels(int subjectId) {
-        subjectViewModel = new ViewModelProvider(this).get(SubjectViewModel.class);
+        SubjectViewModel subjectViewModel = new ViewModelProvider(this).get(SubjectViewModel.class);
         flashcardViewModel = new ViewModelProvider(this).get(FlashcardViewModel.class);
 
         subjectViewModel.getSubjectById(subjectId).observe(this, subject -> {
@@ -115,7 +112,7 @@ public class StudySessionActivity extends AppCompatActivity {
 
         AnimatorSet flipOutSet = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_out);
         AnimatorSet flipInSet = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_in);
-        
+
         flipOutSet.setTarget(cardFlashcard);
         flipInSet.setTarget(cardFlashcard);
 

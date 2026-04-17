@@ -23,7 +23,7 @@
         style="@style/Widget.Rivi.IconButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:contentDescription="Import Subject"
+        android:contentDescription="@string/import_subject"
         android:src="@drawable/ic_file_upload"
         app:layout_constraintBottom_toBottomOf="@id/text_app_title"
         app:layout_constraintEnd_toEndOf="parent"

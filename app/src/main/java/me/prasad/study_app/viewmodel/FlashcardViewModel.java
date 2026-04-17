@@ -34,7 +34,7 @@ public class FlashcardViewModel extends AndroidViewModel {
             } else {
                 cards = repository.getSmartFiveCards(subjectId, System.currentTimeMillis());
             }
-            
+
             if (cards == null || cards.isEmpty()) {
                 isSessionComplete.postValue(true);
             } else {

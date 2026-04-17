@@ -19,12 +19,11 @@ import java.util.concurrent.TimeUnit;
 
 import me.prasad.study_app.R;
 import me.prasad.study_app.data.entity.Subject;
-
 import me.prasad.study_app.viewmodel.SubjectViewModel;
 
 public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectViewHolder> {
 
-    private static final DiffUtil.ItemCallback<Subject> DIFF_CALLBACK = new DiffUtil.ItemCallback<Subject>() {
+    private static final DiffUtil.ItemCallback<Subject> DIFF_CALLBACK = new DiffUtil.ItemCallback<>() {
         @Override
         public boolean areItemsTheSame(@NonNull Subject oldItem, @NonNull Subject newItem) {
             return oldItem.getSubjectId() == newItem.getSubjectId();

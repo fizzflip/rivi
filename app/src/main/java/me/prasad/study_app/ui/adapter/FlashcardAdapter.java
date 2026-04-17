@@ -15,16 +15,6 @@ import me.prasad.study_app.data.entity.Flashcard;
 
 public class FlashcardAdapter extends ListAdapter<Flashcard, FlashcardAdapter.FlashcardViewHolder> {
 
-    private OnCardDeleteListener deleteListener;
-
-    public interface OnCardDeleteListener {
-        void onDelete(Flashcard card);
-    }
-
-    public void setOnCardDeleteListener(OnCardDeleteListener listener) {
-        this.deleteListener = listener;
-    }
-
     private static final DiffUtil.ItemCallback<Flashcard> DIFF_CALLBACK = new DiffUtil.ItemCallback<Flashcard>() {
         @Override
         public boolean areItemsTheSame(@NonNull Flashcard oldItem, @NonNull Flashcard newItem) {
@@ -37,9 +27,14 @@ public class FlashcardAdapter extends ListAdapter<Flashcard, FlashcardAdapter.Fl
                     oldItem.getAnswer().equals(newItem.getAnswer());
         }
     };
+    private OnCardDeleteListener deleteListener;
 
     public FlashcardAdapter() {
         super(DIFF_CALLBACK);
+    }
+
+    public void setOnCardDeleteListener(OnCardDeleteListener listener) {
+        this.deleteListener = listener;
     }
 
     @NonNull
@@ -54,6 +49,10 @@ public class FlashcardAdapter extends ListAdapter<Flashcard, FlashcardAdapter.Fl
     public void onBindViewHolder(@NonNull FlashcardViewHolder holder, int position) {
         Flashcard card = getItem(position);
         holder.bind(card, deleteListener);
+    }
+
+    public interface OnCardDeleteListener {
+        void onDelete(Flashcard card);
     }
 
     static class FlashcardViewHolder extends RecyclerView.ViewHolder {

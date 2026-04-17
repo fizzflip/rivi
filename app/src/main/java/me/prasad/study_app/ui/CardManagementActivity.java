@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import me.prasad.study_app.R;
@@ -53,14 +52,12 @@ public class CardManagementActivity extends AppCompatActivity {
         adapter = new FlashcardAdapter();
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnCardDeleteListener(card -> {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.delete_card)
-                    .setMessage("Are you sure you want to delete this card?")
-                    .setPositiveButton("Delete", (dialog, which) -> viewModel.deleteFlashcard(card))
-                    .setNegativeButton("Cancel", null)
-                    .show();
-        });
+        adapter.setOnCardDeleteListener(card -> new AlertDialog.Builder(this)
+                .setTitle(R.string.delete_card)
+                .setMessage("Are you sure you want to delete this card?")
+                .setPositiveButton("Delete", (dialog, which) -> viewModel.deleteFlashcard(card))
+                .setNegativeButton("Cancel", null)
+                .show());
 
         View fab = findViewById(R.id.fab_add_card);
         if (fab != null) {

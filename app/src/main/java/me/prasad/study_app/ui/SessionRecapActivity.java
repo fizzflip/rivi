@@ -1,10 +1,13 @@
 package me.prasad.study_app.ui;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
-import me.prasad.study_app.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.button.MaterialButton;
+
+import me.prasad.study_app.R;
 
 public class SessionRecapActivity extends AppCompatActivity {
 

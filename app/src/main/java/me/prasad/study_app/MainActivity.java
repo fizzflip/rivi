@@ -37,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     private final Calendar calendar = Calendar.getInstance();
     private SubjectViewModel viewModel;
-    private SubjectAdapter adapter;
-
-    private int pendingExportSubjectId = -1;
-
     private final ActivityResultLauncher<String> importLauncher = registerForActivityResult(
             new ActivityResultContracts.GetContent(),
             uri -> {
@@ -49,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
     );
-
+    private SubjectAdapter adapter;
+    private int pendingExportSubjectId = -1;
     private final ActivityResultLauncher<String> exportLauncher = registerForActivityResult(
             new ActivityResultContracts.CreateDocument("application/json"),
             uri -> {
