@@ -162,7 +162,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onExportClick(Subject subject) {
                 pendingExportSubjectId = subject.getSubjectId();
-                exportLauncher.launch(subject.getName().replaceAll("\\s+", "_") + ".json");
+                String name = subject.getName();
+                String fileName = (name != null ? name.replaceAll("\\s+", "_") : "subject") + ".json";
+                exportLauncher.launch(fileName);
             }
         });
     }

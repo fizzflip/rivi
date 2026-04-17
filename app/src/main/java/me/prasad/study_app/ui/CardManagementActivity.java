@@ -62,8 +62,10 @@ public class CardManagementActivity extends AppCompatActivity {
                     .show();
         });
 
-        FloatingActionButton fab = findViewById(R.id.fab_add_card);
-        fab.setOnClickListener(v -> showAddCardDialog());
+        View fab = findViewById(R.id.fab_add_card);
+        if (fab != null) {
+            fab.setOnClickListener(v -> showAddCardDialog());
+        }
     }
 
     private void showAddCardDialog() {

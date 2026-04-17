@@ -108,7 +108,8 @@ public class RiviRepository {
 
     public void exportSubject(int subjectId, OutputStream outputStream) {
         RiviDatabase.databaseWriteExecutor.execute(() -> {
-            try {
+            try (OutputStream os = outputStream;
+                 OutputStreamWriter writer = new OutputStreamWriter(os, StandardCharsets.UTF_8)) {
                 Subject subject = riviDao.getSubjectByIdSync(subjectId);
                 List<Flashcard> cards = riviDao.getAllCardsForCram(subjectId);
 
@@ -119,10 +120,7 @@ public class RiviRepository {
 
                 SubjectExportDto exportDto = new SubjectExportDto(subject.getName(), dtos);
                 String json = gson.toJson(exportDto);
-
-                try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8)) {
-                    writer.write(json);
-                }
+                writer.write(json);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -131,7 +129,8 @@ public class RiviRepository {
 
     public void importSubject(InputStream inputStream, Runnable onComplete) {
         RiviDatabase.databaseWriteExecutor.execute(() -> {
-            try (InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
+            try (InputStream is = inputStream;
+                 InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
                 SubjectExportDto importDto = gson.fromJson(reader, SubjectExportDto.class);
                 if (importDto != null) {
                     Subject subject = new Subject(importDto.subjectName, System.currentTimeMillis() + 604800000L, 0);
@@ -142,9 +141,10 @@ public class RiviRepository {
                         riviDao.insertFlashcard(card);
                     }
                 }
-                if (onComplete != null) onComplete.run();
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                if (onComplete != null) onComplete.run();
             }
         });
     }

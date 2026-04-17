@@ -39,7 +39,6 @@ public class StudySessionActivity extends AppCompatActivity {
     private List<Flashcard> sessionCards;
     private Subject currentSubject;
     private boolean isShowingAnswer = false;
-    private AnimatorSet flipOut, flipIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +73,6 @@ public class StudySessionActivity extends AppCompatActivity {
         btnHard.setOnClickListener(v -> submitGrade(SRSLogic.Grade.HARD));
         btnGood.setOnClickListener(v -> submitGrade(SRSLogic.Grade.GOOD));
         btnEasy.setOnClickListener(v -> submitGrade(SRSLogic.Grade.EASY));
-
-        flipOut = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_out);
-        flipIn = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_in);
     }
 
     private void setupViewModels(int subjectId) {
@@ -86,7 +82,8 @@ public class StudySessionActivity extends AppCompatActivity {
         subjectViewModel.getSubjectById(subjectId).observe(this, subject -> {
             if (subject != null) {
                 currentSubject = subject;
-                textSubjectTitle.setText(subject.getName().toUpperCase());
+                String name = subject.getName();
+                textSubjectTitle.setText(name != null ? name.toUpperCase() : "");
                 flashcardViewModel.startSession(subject.getSubjectId(), subject.getExamDate());
             }
         });
@@ -116,18 +113,21 @@ public class StudySessionActivity extends AppCompatActivity {
     private void flipCard() {
         if (sessionCards == null || sessionCards.isEmpty()) return;
 
-        flipOut.setTarget(cardFlashcard);
-        flipIn.setTarget(cardFlashcard);
+        AnimatorSet flipOutSet = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_out);
+        AnimatorSet flipInSet = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_in);
+        
+        flipOutSet.setTarget(cardFlashcard);
+        flipInSet.setTarget(cardFlashcard);
 
-        flipOut.start();
-        flipOut.addListener(new android.animation.AnimatorListenerAdapter() {
+        flipOutSet.addListener(new android.animation.AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(android.animation.Animator animation) {
                 isShowingAnswer = !isShowingAnswer;
                 updateUI();
-                flipIn.start();
+                flipInSet.start();
             }
         });
+        flipOutSet.start();
     }
 
     private void updateUI() {
