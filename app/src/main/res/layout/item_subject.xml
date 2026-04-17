@@ -55,10 +55,22 @@
             android:layout_height="4dp"
             android:layout_marginTop="12dp"
             android:progressDrawable="@drawable/bg_progress_bar"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_manage_cards"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_top_toBottomOf="@id/text_cards_due"
             tools:progress="60" />
+
+        <ImageButton
+            android:id="@+id/btn_manage_cards"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/manage_cards"
+            android:src="@android:drawable/ic_menu_edit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_top_toTopOf="parent"
+            app:tint="@color/rivi_text_secondary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -116,7 +116,7 @@ public class StudySessionActivity extends AppCompatActivity {
         }
 
         Flashcard currentCard = sessionCards.get(index);
-        textSessionProgress.setText((index + 1) + " / " + sessionCards.size());
+        textSessionProgress.setText(getString(R.string.session_progress_format, (index + 1), sessionCards.size()));
 
         if (isShowingAnswer) {
             textCardContent.setText(currentCard.getAnswer());

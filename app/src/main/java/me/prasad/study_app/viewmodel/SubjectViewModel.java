@@ -29,6 +29,10 @@ public class SubjectViewModel extends AndroidViewModel {
         return allSubjects;
     }
 
+    public LiveData<Subject> getSubjectById(int subjectId) {
+        return repository.getSubjectById(subjectId);
+    }
+
     public void insert(Subject subject) {
         repository.insertSubject(subject);
     }
