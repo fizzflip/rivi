@@ -24,6 +24,10 @@
             android:name=".ui.StudySessionActivity"
             android:exported="false"
             android:theme="@style/Theme.Rivi" />
+        <activity
+            android:name=".ui.CardManagementActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Rivi" />
     </application>
 
 </manifest>

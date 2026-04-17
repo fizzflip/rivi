@@ -16,7 +16,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_top_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_flashcards"
@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_top_toBottomOf="@id/text_manage_title"
+        app:layout_constraintTop_toBottomOf="@id/text_manage_title"
         tools:listitem="@layout/item_flashcard" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

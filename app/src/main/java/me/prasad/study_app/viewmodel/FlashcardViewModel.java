@@ -41,6 +41,10 @@ public class FlashcardViewModel extends AndroidViewModel {
         }).start();
     }
 
+    public LiveData<List<Flashcard>> getFlashcardsForSubject(int subjectId) {
+        return repository.getFlashcardsForSubject(subjectId);
+    }
+
     public LiveData<List<Flashcard>> getSessionCards() {
         return sessionCards;
     }

@@ -22,7 +22,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@id/text_streak"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_top_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Organic Chemistry" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/text_subject_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_top_toTopOf="@id/text_subject_name"
+            app:layout_constraintTop_toTopOf="@id/text_subject_name"
             tools:text="12 day streak" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:textAppearance="@style/TextAppearance.Rivi.UI"
             android:textColor="@color/rivi_text_secondary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_top_toBottomOf="@id/text_subject_name"
+            app:layout_constraintTop_toBottomOf="@id/text_subject_name"
             tools:text="5 cards due today" />
 
         <ProgressBar
@@ -57,7 +57,7 @@
             android:progressDrawable="@drawable/bg_progress_bar"
             app:layout_constraintEnd_toStartOf="@id/btn_manage_cards"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_top_toBottomOf="@id/text_cards_due"
+            app:layout_constraintTop_toBottomOf="@id/text_cards_due"
             tools:progress="60" />
 
         <ImageButton
@@ -69,7 +69,7 @@
             android:src="@android:drawable/ic_menu_edit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_top_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/rivi_text_secondary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

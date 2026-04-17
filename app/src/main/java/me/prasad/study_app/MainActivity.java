@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import me.prasad.study_app.data.entity.Subject;
+import me.prasad.study_app.ui.CardManagementActivity;
 import me.prasad.study_app.ui.StudySessionActivity;
 import me.prasad.study_app.ui.adapter.SubjectAdapter;
 import me.prasad.study_app.viewmodel.SubjectViewModel;
@@ -91,10 +92,20 @@ public class MainActivity extends AppCompatActivity {
         adapter = new SubjectAdapter();
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnSubjectClickListener(subject -> {
-            Intent intent = new Intent(this, StudySessionActivity.class);
-            intent.putExtra(StudySessionActivity.EXTRA_SUBJECT_ID, subject.getSubjectId());
-            startActivity(intent);
+        adapter.setOnSubjectClickListener(new SubjectAdapter.OnSubjectClickListener() {
+            @Override
+            public void onSubjectClick(Subject subject) {
+                Intent intent = new Intent(MainActivity.this, StudySessionActivity.class);
+                intent.putExtra(StudySessionActivity.EXTRA_SUBJECT_ID, subject.getSubjectId());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onManageCardsClick(Subject subject) {
+                Intent intent = new Intent(MainActivity.this, CardManagementActivity.class);
+                intent.putExtra(CardManagementActivity.EXTRA_SUBJECT_ID, subject.getSubjectId());
+                startActivity(intent);
+            }
         });
     }
 }

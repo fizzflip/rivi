@@ -3,6 +3,7 @@ package me.prasad.study_app.ui.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -58,6 +59,7 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
 
     public interface OnSubjectClickListener {
         void onSubjectClick(Subject subject);
+        void onManageCardsClick(Subject subject);
     }
 
     class SubjectViewHolder extends RecyclerView.ViewHolder {
@@ -65,6 +67,7 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
         private final TextView streakText;
         private final TextView cardsDueText;
         private final ProgressBar proximityProgress;
+        private final ImageButton manageCardsButton;
 
         public SubjectViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,11 +75,19 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
             streakText = itemView.findViewById(R.id.text_streak);
             cardsDueText = itemView.findViewById(R.id.text_cards_due);
             proximityProgress = itemView.findViewById(R.id.progress_exam_proximity);
+            manageCardsButton = itemView.findViewById(R.id.btn_manage_cards);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (listener != null && position != RecyclerView.NO_POSITION) {
                     listener.onSubjectClick(getItem(position));
+                }
+            });
+
+            manageCardsButton.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onManageCardsClick(getItem(position));
                 }
             });
         }
