@@ -2,13 +2,17 @@ package me.prasad.study_app;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -35,6 +39,26 @@ public class MainActivity extends AppCompatActivity {
     private SubjectViewModel viewModel;
     private SubjectAdapter adapter;
 
+    private int pendingExportSubjectId = -1;
+
+    private final ActivityResultLauncher<String> importLauncher = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            uri -> {
+                if (uri != null) {
+                    importSubject(uri);
+                }
+            }
+    );
+
+    private final ActivityResultLauncher<String> exportLauncher = registerForActivityResult(
+            new ActivityResultContracts.CreateDocument("application/json"),
+            uri -> {
+                if (uri != null) {
+                    exportSubject(uri);
+                }
+            }
+    );
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +71,30 @@ public class MainActivity extends AppCompatActivity {
 
         ExtendedFloatingActionButton fab = findViewById(R.id.fab_add_subject);
         fab.setOnClickListener(v -> showAddSubjectDialog());
+
+        ImageButton btnImport = findViewById(R.id.btn_import);
+        btnImport.setOnClickListener(v -> importLauncher.launch("application/json"));
+    }
+
+    private void importSubject(Uri uri) {
+        try {
+            viewModel.importSubject(getContentResolver().openInputStream(uri), () -> {
+                runOnUiThread(() -> Toast.makeText(this, "Subject imported", Toast.LENGTH_SHORT).show());
+            });
+        } catch (Exception e) {
+            Toast.makeText(this, "Import failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void exportSubject(Uri uri) {
+        if (pendingExportSubjectId == -1) return;
+        try {
+            viewModel.exportSubject(pendingExportSubjectId, getContentResolver().openOutputStream(uri));
+            Toast.makeText(this, "Exporting...", Toast.LENGTH_SHORT).show();
+            pendingExportSubjectId = -1;
+        } catch (Exception e) {
+            Toast.makeText(this, "Export failed", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void showAddSubjectDialog() {
@@ -109,6 +157,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, CardManagementActivity.class);
                 intent.putExtra(CardManagementActivity.EXTRA_SUBJECT_ID, subject.getSubjectId());
                 startActivity(intent);
+            }
+
+            @Override
+            public void onExportClick(Subject subject) {
+                pendingExportSubjectId = subject.getSubjectId();
+                exportLauncher.launch(subject.getName().replaceAll("\\s+", "_") + ".json");
             }
         });
     }

@@ -16,6 +16,8 @@
     <string name="answer_hint">Answer</string>
     <string name="no_cards_message">No cards in this subject. Add some to start studying!</string>
     <string name="manage_cards">Manage Cards</string>
+    <string name="export_subject">Export Subject</string>
+    <string name="import_subject">Import Subject</string>
     <string name="delete_card">Delete Card</string>
     <string name="recap_title">Session Complete</string>
     <string name="recap_subtitle">You have mastered %d concepts today.</string>

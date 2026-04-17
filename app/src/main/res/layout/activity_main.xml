@@ -18,6 +18,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/btn_import"
+        style="@style/Widget.Rivi.IconButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="Import Subject"
+        android:src="@drawable/ic_file_upload"
+        app:layout_constraintBottom_toBottomOf="@id/text_app_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_app_title"
+        app:tint="@color/rivi_primary" />
+
     <TextView
         android:id="@+id/text_app_subtitle"
         android:layout_width="wrap_content"

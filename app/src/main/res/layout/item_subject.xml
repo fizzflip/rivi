@@ -61,6 +61,18 @@
             tools:progress="60" />
 
         <ImageButton
+            android:id="@+id/btn_export"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/export_subject"
+            android:src="@drawable/ic_file_download"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_manage_cards"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/rivi_text_secondary" />
+
+        <ImageButton
             android:id="@+id/btn_manage_cards"
             android:layout_width="48dp"
             android:layout_height="48dp"

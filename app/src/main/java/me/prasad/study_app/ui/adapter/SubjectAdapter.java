@@ -68,6 +68,8 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
         void onSubjectClick(Subject subject);
 
         void onManageCardsClick(Subject subject);
+
+        void onExportClick(Subject subject);
     }
 
     class SubjectViewHolder extends RecyclerView.ViewHolder {
@@ -76,6 +78,7 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
         private final TextView cardsDueText;
         private final ProgressBar proximityProgress;
         private final ImageButton manageCardsButton;
+        private final ImageButton exportButton;
 
         public SubjectViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +87,7 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
             cardsDueText = itemView.findViewById(R.id.text_cards_due);
             proximityProgress = itemView.findViewById(R.id.progress_exam_proximity);
             manageCardsButton = itemView.findViewById(R.id.btn_manage_cards);
+            exportButton = itemView.findViewById(R.id.btn_export);
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
@@ -96,6 +100,13 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
                 int position = getAdapterPosition();
                 if (listener != null && position != RecyclerView.NO_POSITION) {
                     listener.onManageCardsClick(getItem(position));
+                }
+            });
+
+            exportButton.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onExportClick(getItem(position));
                 }
             });
         }
