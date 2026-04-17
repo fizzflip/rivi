@@ -76,6 +76,12 @@ public class RiviRepository {
         });
     }
 
+    public void deleteFlashcard(Flashcard flashcard) {
+        RiviDatabase.databaseWriteExecutor.execute(() -> {
+            riviDao.deleteFlashcard(flashcard);
+        });
+    }
+
     /**
      * Fetches the "Smart 5" cards.
      * Note: This is synchronous/blocking, should be called from a background thread or via a custom implementation.
