@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Rivi</string>
+    <string name="app_subtitle">5 questions. Every day.</string>
+    <string name="new_subject">New Subject</string>
+    <string name="add_subject_title">Add New Subject</string>
+    <string name="subject_name_hint">Subject Name (e.g., Biology)</string>
+    <string name="exam_date_hint">Exam Date</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="streak_format">%d day streak</string>
+    <string name="cards_due_format">%d cards due today</string>
 </resources>

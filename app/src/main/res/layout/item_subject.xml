@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Rivi.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/text_subject_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Rivi.Academic"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/text_streak"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_top_toTopOf="parent"
+            tools:text="Organic Chemistry" />
+
+        <TextView
+            android:id="@+id/text_streak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Rivi.UI"
+            android:textColor="@color/rivi_text_secondary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/text_subject_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_top_toTopOf="@id/text_subject_name"
+            tools:text="12 day streak" />
+
+        <TextView
+            android:id="@+id/text_cards_due"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.Rivi.UI"
+            android:textColor="@color/rivi_text_secondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_top_toBottomOf="@id/text_subject_name"
+            tools:text="5 cards due today" />
+
+        <ProgressBar
+            android:id="@+id/progress_exam_proximity"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="12dp"
+            android:progressDrawable="@drawable/bg_progress_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_top_toBottomOf="@id/text_cards_due"
+            tools:progress="60" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

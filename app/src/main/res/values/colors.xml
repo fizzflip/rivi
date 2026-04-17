@@ -2,4 +2,20 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Rivi Minimalist Palette -->
+    <color name="rivi_background">#FFFFFF</color>
+    <color name="rivi_background_dark">#000000</color>
+
+    <color name="rivi_surface">#FFFFFF</color>
+    <color name="rivi_surface_dark">#121212</color>
+
+    <color name="rivi_primary">#000000</color>
+    <color name="rivi_primary_dark">#FFFFFF</color>
+
+    <color name="rivi_stroke">#E0E0E0</color>
+    <color name="rivi_stroke_dark">#333333</color>
+
+    <color name="rivi_text_secondary">#757575</color>
+    <color name="rivi_text_secondary_dark">#B0B0B0</color>
 </resources>

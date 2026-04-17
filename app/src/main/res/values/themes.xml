@@ -1,9 +1,47 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Rivi" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Theme.Rivi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/rivi_primary</item>
+        <item name="colorPrimaryVariant">@color/rivi_primary</item>
+        <item name="colorOnPrimary">@color/rivi_surface</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/rivi_primary</item>
+        <item name="colorSecondaryVariant">@color/rivi_primary</item>
+        <item name="colorOnSecondary">@color/rivi_surface</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/rivi_background</item>
+        <item name="colorSurface">@color/rivi_surface</item>
+        <item name="colorOnSurface">@color/rivi_primary</item>
     </style>
 
-    <style name="Theme.Rivi" parent="Base.Theme.Rivi" />
+    <!-- Academic Card Style -->
+    <style name="Widget.Rivi.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">0dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/rivi_stroke</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Rivi.SmallComponent</item>
+    </style>
+
+    <style name="ShapeAppearance.Rivi.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <!-- Typography Styles -->
+    <style name="TextAppearance.Rivi.UI" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="TextAppearance.Rivi.Academic" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+    </style>
 </resources>
