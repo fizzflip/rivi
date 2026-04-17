@@ -60,10 +60,10 @@ public class FlashcardViewModel extends AndroidViewModel {
     public void submitGrade(Flashcard card, Subject subject, SRSLogic.Grade grade) {
         SRSLogic.updateCard(card, subject, grade);
         repository.updateFlashcard(card);
-        
+
         Integer current = currentIndex.getValue();
         List<Flashcard> cards = sessionCards.getValue();
-        
+
         if (current != null && cards != null) {
             if (current + 1 < cards.size()) {
                 currentIndex.setValue(current + 1);
@@ -72,7 +72,7 @@ public class FlashcardViewModel extends AndroidViewModel {
             }
         }
     }
-    
+
     public void insertFlashcard(Flashcard card) {
         repository.insertFlashcard(card);
     }

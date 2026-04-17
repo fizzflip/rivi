@@ -11,26 +11,15 @@ import me.prasad.study_app.data.entity.Subject;
  */
 public class SRSLogic {
 
-    public enum Grade {
-        AGAIN(0),  // Complete failure
-        HARD(3),   // Correct response after a serious hesitation
-        GOOD(4),   // Correct response after a hesitation
-        EASY(5);   // Perfect response
-
-        private final int value;
-        Grade(int value) { this.value = value; }
-        public int getValue() { return value; }
-    }
-
     private static final float MIN_EASE_FACTOR = 1.3f;
     private static final long MS_IN_DAY = TimeUnit.DAYS.toMillis(1);
 
     /**
      * Updates the flashcard statistics based on the user's performance.
-     * 
-     * @param card The flashcard being graded.
+     *
+     * @param card    The flashcard being graded.
      * @param subject The subject the flashcard belongs to (used for exam date).
-     * @param grade The quality of the response.
+     * @param grade   The quality of the response.
      */
     public static void updateCard(Flashcard card, Subject subject, Grade grade) {
         float easeFactor = card.getEaseFactor();
@@ -91,7 +80,7 @@ public class SRSLogic {
             return Math.max(1, interval / 2);
         } else if (daysUntilExam <= 30) {
             // Within 1 month: Reduce interval by 25%
-            return Math.max(1, (int)(interval * 0.75));
+            return Math.max(1, (int) (interval * 0.75));
         }
 
         return interval;
@@ -103,5 +92,22 @@ public class SRSLogic {
     public static boolean isEmergencyCramMode(long examDate) {
         long timeUntilExam = examDate - System.currentTimeMillis();
         return timeUntilExam > 0 && timeUntilExam <= (2 * MS_IN_DAY);
+    }
+
+    public enum Grade {
+        AGAIN(0),  // Complete failure
+        HARD(3),   // Correct response after a serious hesitation
+        GOOD(4),   // Correct response after a hesitation
+        EASY(5);   // Perfect response
+
+        private final int value;
+
+        Grade(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }

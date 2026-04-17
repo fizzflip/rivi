@@ -8,18 +8,18 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="@string/add_subject_title"
         android:textAppearance="@style/TextAppearance.Rivi.Academic"
-        android:textSize="24sp"
-        android:layout_marginBottom="16dp"/>
+        android:textSize="24sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_subject_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/subject_name_hint"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:hint="@string/subject_name_hint">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_subject_name"
@@ -33,23 +33,23 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/exam_date_hint"
-        android:layout_marginBottom="24dp">
+        android:layout_marginBottom="24dp"
+        android:hint="@string/exam_date_hint">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_exam_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="false"
             android:clickable="true"
+            android:focusable="false"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end">
+        android:gravity="end"
+        android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_cancel"
@@ -57,16 +57,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:textColor="@color/rivi_text_secondary"/>
+            android:textColor="@color/rivi_text_secondary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/save"
             android:layout_marginStart="8dp"
             android:backgroundTint="@color/black"
-            android:textColor="@color/white"/>
+            android:text="@string/save"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>

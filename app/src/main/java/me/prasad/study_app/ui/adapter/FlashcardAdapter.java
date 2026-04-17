@@ -15,10 +15,6 @@ import me.prasad.study_app.data.entity.Flashcard;
 
 public class FlashcardAdapter extends ListAdapter<Flashcard, FlashcardAdapter.FlashcardViewHolder> {
 
-    public FlashcardAdapter() {
-        super(DIFF_CALLBACK);
-    }
-
     private static final DiffUtil.ItemCallback<Flashcard> DIFF_CALLBACK = new DiffUtil.ItemCallback<Flashcard>() {
         @Override
         public boolean areItemsTheSame(@NonNull Flashcard oldItem, @NonNull Flashcard newItem) {
@@ -31,6 +27,10 @@ public class FlashcardAdapter extends ListAdapter<Flashcard, FlashcardAdapter.Fl
                     oldItem.getAnswer().equals(newItem.getAnswer());
         }
     };
+
+    public FlashcardAdapter() {
+        super(DIFF_CALLBACK);
+    }
 
     @NonNull
     @Override

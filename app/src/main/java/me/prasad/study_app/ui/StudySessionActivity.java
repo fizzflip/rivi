@@ -27,7 +27,7 @@ public class StudySessionActivity extends AppCompatActivity {
 
     private FlashcardViewModel flashcardViewModel;
     private SubjectViewModel subjectViewModel;
-    
+
     private TextView textSubjectTitle, textSessionProgress, textCardContent;
     private MaterialCardView cardFlashcard;
     private LinearLayout layoutGrading;
@@ -58,14 +58,14 @@ public class StudySessionActivity extends AppCompatActivity {
         textCardContent = findViewById(R.id.text_card_content);
         cardFlashcard = findViewById(R.id.card_flashcard);
         layoutGrading = findViewById(R.id.layout_grading);
-        
+
         btnAgain = findViewById(R.id.btn_again);
         btnHard = findViewById(R.id.btn_hard);
         btnGood = findViewById(R.id.btn_good);
         btnEasy = findViewById(R.id.btn_easy);
 
         cardFlashcard.setOnClickListener(v -> flipCard());
-        
+
         btnAgain.setOnClickListener(v -> submitGrade(SRSLogic.Grade.AGAIN));
         btnHard.setOnClickListener(v -> submitGrade(SRSLogic.Grade.HARD));
         btnGood.setOnClickListener(v -> submitGrade(SRSLogic.Grade.GOOD));
@@ -104,7 +104,7 @@ public class StudySessionActivity extends AppCompatActivity {
 
     private void flipCard() {
         if (sessionCards == null || sessionCards.isEmpty()) return;
-        
+
         isShowingAnswer = !isShowingAnswer;
         updateUI();
     }

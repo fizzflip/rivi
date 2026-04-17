@@ -73,7 +73,7 @@ public class RiviRepository {
     }
 
     /**
-     * Fetches the "Smart 5" cards. 
+     * Fetches the "Smart 5" cards.
      * Note: This is synchronous/blocking, should be called from a background thread or via a custom implementation.
      */
     public List<Flashcard> getSmartFiveCards(int subjectId, long todayTimestamp) {

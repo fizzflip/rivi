@@ -19,12 +19,6 @@ import me.prasad.study_app.data.entity.Subject;
 
 public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectViewHolder> {
 
-    private OnSubjectClickListener listener;
-
-    public SubjectAdapter() {
-        super(DIFF_CALLBACK);
-    }
-
     private static final DiffUtil.ItemCallback<Subject> DIFF_CALLBACK = new DiffUtil.ItemCallback<Subject>() {
         @Override
         public boolean areItemsTheSame(@NonNull Subject oldItem, @NonNull Subject newItem) {
@@ -38,6 +32,11 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
                     oldItem.getCurrentStreak() == newItem.getCurrentStreak();
         }
     };
+    private OnSubjectClickListener listener;
+
+    public SubjectAdapter() {
+        super(DIFF_CALLBACK);
+    }
 
     @NonNull
     @Override
@@ -59,6 +58,7 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
 
     public interface OnSubjectClickListener {
         void onSubjectClick(Subject subject);
+
         void onManageCardsClick(Subject subject);
     }
 
@@ -95,17 +95,17 @@ public class SubjectAdapter extends ListAdapter<Subject, SubjectAdapter.SubjectV
         public void bind(Subject subject) {
             nameText.setText(subject.getName());
             streakText.setText(itemView.getContext().getString(R.string.streak_format, subject.getCurrentStreak()));
-            
+
             // Logic for "cards due" would ideally come from the DAO/ViewModel
             // For now, we'll placeholder it or let the Activity handle it if needed.
             // In a full implementation, we might use a Wrapper object for Subject + DueCount.
-            cardsDueText.setText(itemView.getContext().getString(R.string.cards_due_format, 5)); 
+            cardsDueText.setText(itemView.getContext().getString(R.string.cards_due_format, 5));
 
             // Calculate progress towards exam (simplified)
             long now = System.currentTimeMillis();
             long totalDuration = subject.getExamDate() - (now - TimeUnit.DAYS.toMillis(30)); // Assume 30 day window for progress
             long timePassed = now - (subject.getExamDate() - TimeUnit.DAYS.toMillis(30));
-            
+
             if (totalDuration > 0) {
                 int progress = (int) ((timePassed * 100) / totalDuration);
                 proximityProgress.setProgress(Math.max(0, Math.min(100, progress)));

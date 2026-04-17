@@ -1,9 +1,8 @@
 package me.prasad.study_app;
 
-import android.os.Bundle;
-
-import android.content.Intent;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -30,9 +29,9 @@ import me.prasad.study_app.viewmodel.SubjectViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final Calendar calendar = Calendar.getInstance();
     private SubjectViewModel viewModel;
     private SubjectAdapter adapter;
-    private final Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

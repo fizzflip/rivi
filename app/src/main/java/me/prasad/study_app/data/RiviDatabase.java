@@ -20,16 +20,13 @@ import me.prasad.study_app.data.entity.Subject;
 @Database(entities = {Subject.class, Flashcard.class}, version = 1, exportSchema = false)
 public abstract class RiviDatabase extends RoomDatabase {
 
-    public abstract RiviDao riviDao();
-
-    private static volatile RiviDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
-    
     /**
      * Executor service used to run database operations on a background thread.
      */
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    private static volatile RiviDatabase INSTANCE;
 
     /**
      * Gets the singleton instance of the RiviDatabase.
@@ -50,4 +47,6 @@ public abstract class RiviDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
+    public abstract RiviDao riviDao();
 }

@@ -10,6 +10,10 @@ android {
         }
     }
 
+    androidResources {
+        localeFilters += "en"
+    }
+
     defaultConfig {
         applicationId = "me.prasad.study_app"
         minSdk = 24
@@ -21,6 +25,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            // Speed up debug builds
+            isMinifyEnabled = false
+            enableUnitTestCoverage = false
+            enableAndroidTestCoverage = false
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(

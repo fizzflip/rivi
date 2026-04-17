@@ -10,14 +10,14 @@ import androidx.room.PrimaryKey;
  * Uses a foreign key to link back to the Subject entity.
  */
 @Entity(
-    tableName = "flashcards",
-    foreignKeys = @ForeignKey(
-        entity = Subject.class,
-        parentColumns = "subjectId",
-        childColumns = "subjectId",
-        onDelete = ForeignKey.CASCADE
-    ),
-    indices = {@Index("subjectId")}
+        tableName = "flashcards",
+        foreignKeys = @ForeignKey(
+                entity = Subject.class,
+                parentColumns = "subjectId",
+                childColumns = "subjectId",
+                onDelete = ForeignKey.CASCADE
+        ),
+        indices = {@Index("subjectId")}
 )
 public class Flashcard {
 

@@ -23,7 +23,7 @@ import me.prasad.study_app.viewmodel.FlashcardViewModel;
 public class CardManagementActivity extends AppCompatActivity {
 
     public static final String EXTRA_SUBJECT_ID = "extra_subject_id";
-    
+
     private FlashcardViewModel viewModel;
     private FlashcardAdapter adapter;
     private int subjectId;

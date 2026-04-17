@@ -52,15 +52,15 @@ public interface RiviDao {
      * The "Smart 5" Query:
      * Fetches up to 5 cards for a specific subject that are due for review (nextReviewDate <= today).
      * Cards are ordered by nextReviewDate to prioritize those most overdue.
-     * 
-     * @param subjectId The ID of the subject.
+     *
+     * @param subjectId      The ID of the subject.
      * @param todayTimestamp The current UNIX timestamp (at the start of the day).
      * @return A list of 5 flashcards due for review.
      */
     @Query("SELECT * FROM flashcards " +
-           "WHERE subjectId = :subjectId AND nextReviewDate <= :todayTimestamp " +
-           "ORDER BY nextReviewDate ASC " +
-           "LIMIT 5")
+            "WHERE subjectId = :subjectId AND nextReviewDate <= :todayTimestamp " +
+            "ORDER BY nextReviewDate ASC " +
+            "LIMIT 5")
     List<Flashcard> getSmartFiveCards(int subjectId, long todayTimestamp);
 
     /**
