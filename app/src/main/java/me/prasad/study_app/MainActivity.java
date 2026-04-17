@@ -75,9 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void importSubject(Uri uri) {
         try {
-            viewModel.importSubject(getContentResolver().openInputStream(uri), () -> {
-                runOnUiThread(() -> Toast.makeText(this, "Subject imported", Toast.LENGTH_SHORT).show());
-            });
+            viewModel.importSubject(getContentResolver().openInputStream(uri), () -> runOnUiThread(() -> Toast.makeText(this, "Subject imported", Toast.LENGTH_SHORT).show()));
         } catch (Exception e) {
             Toast.makeText(this, "Import failed", Toast.LENGTH_SHORT).show();
         }

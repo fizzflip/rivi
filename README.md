@@ -57,9 +57,6 @@ Rivi uses a decoupled DTO (Data Transfer Object) system for sharing:
 - **`SubjectExportDto`**: Contains subject metadata and a list of `FlashcardDto`.
 - **Privacy**: Only the question and answer text are exported. Your personal ease factors, intervals, and streaks stay private on your device.
 
-## 📝 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 ---
 *“Non multa, sed multum” – Not many things, but much.*

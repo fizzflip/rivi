@@ -41,9 +41,7 @@ public class CardManagementActivity extends AppCompatActivity {
         setupRecyclerView();
 
         viewModel = new ViewModelProvider(this).get(FlashcardViewModel.class);
-        viewModel.getFlashcardsForSubject(subjectId).observe(this, cards -> {
-            adapter.submitList(cards);
-        });
+        viewModel.getFlashcardsForSubject(subjectId).observe(this, cards -> adapter.submitList(cards));
     }
 
     private void setupRecyclerView() {

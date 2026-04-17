@@ -26,4 +26,5 @@
     <string name="good">Good</string>
     <string name="hard">Hard</string>
     <string name="again">Again</string>
+    <string name="add_new_card">Add new card</string>
 </resources>
