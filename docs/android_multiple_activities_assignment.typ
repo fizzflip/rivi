@@ -18,7 +18,7 @@
           8pt,
           font: "Inter",
           fill: secondary-color,
-        )[Student Name]],
+        )[Sandeep Prasad]],
       )
       v(-5pt)
       line(length: 100%, stroke: 0.5pt + accent-color)
@@ -99,7 +99,8 @@
           #grid(
             columns: (1fr, 2fr),
             row-gutter: 10pt,
-            text(8pt, fill: secondary-color)[STUDENT], text(9pt, weight: "semibold")[Student Name],
+            text(8pt, fill: secondary-color)[STUDENT], text(9pt, weight: "semibold")[Sandeep Prasad],
+            text(8pt, fill: secondary-color)[ERN], text(9pt, weight: "semibold")[240905050085],
             text(8pt, fill: secondary-color)[ALA - III], text(9pt, weight: "semibold")[Multi-Activity Application],
 
             text(8pt, fill: secondary-color)[REPOSITORY],
@@ -126,7 +127,7 @@ In Rivi, we focus on engineering the explicit mapping between a global navigatio
 The manifest serves as the directory for all entry points. Each activity must be registered here to be accessible via Intent dispatching.
 
 #v(10pt)
-#raw(read("app/src/main/AndroidManifest.xml"), lang: "xml")
+#raw(read("../app/src/main/AndroidManifest.xml"), lang: "xml")
 
 #pagebreak()
 = Activity 1: Dashboard (MainActivity)
@@ -142,10 +143,10 @@ The `MainActivity` operates as the primary entry gateway. It is responsible for 
 ]
 
 == Implementation Code
-#raw(read("app/src/main/java/me/prasad/study_app/MainActivity.java"), lang: "java")
+#raw(read("../app/src/main/java/me/prasad/study_app/MainActivity.java"), lang: "java")
 
 == Layout Declaration
-#raw(read("app/src/main/res/layout/activity_main.xml"), lang: "xml")
+#raw(read("../app/src/main/res/layout/activity_main.xml"), lang: "xml")
 
 #pagebreak()
 = Activity 2: Flashcard Study (StudySessionActivity)
@@ -161,13 +162,13 @@ This activity facilitates the core "Active Recall" protocol. It abandons lists f
 ]
 
 == Implementation Code
-#raw(read("app/src/main/java/me/prasad/study_app/ui/StudySessionActivity.java"), lang: "java")
+#raw(read("../app/src/main/java/me/prasad/study_app/ui/StudySessionActivity.java"), lang: "java")
 
 == Layout Declaration
-#raw(read("app/src/main/res/layout/activity_study_session.xml"), lang: "xml")
+#raw(read("../app/src/main/res/layout/activity_study_session.xml"), lang: "xml")
 
 #pagebreak()
-= Activity 3: Administration (CardManagementActivity)
+= Activity 3: Administration \ (CardManagementActivity)
 
 Provides CRUD operations for the knowledge graph. It allows users to modify or inject new flashcards into the database.
 
@@ -180,13 +181,13 @@ Provides CRUD operations for the knowledge graph. It allows users to modify or i
 ]
 
 == Implementation Code
-#raw(read("app/src/main/java/me/prasad/study_app/ui/CardManagementActivity.java"), lang: "java")
+#raw(read("../app/src/main/java/me/prasad/study_app/ui/CardManagementActivity.java"), lang: "java")
 
 == Layout Declaration
-#raw(read("app/src/main/res/layout/activity_card_management.xml"), lang: "xml")
+#raw(read("../app/src/main/res/layout/activity_card_management.xml"), lang: "xml")
 
 #pagebreak()
-= Activity 4: Session Analytics (SessionRecapActivity)
+= Activity 4: Session Analytics \ (SessionRecapActivity)
 
 Bridges the study session and the dashboard, providing positive reinforcement through data visualization.
 
@@ -199,7 +200,7 @@ Bridges the study session and the dashboard, providing positive reinforcement th
 ]
 
 == Implementation Code
-#raw(read("app/src/main/java/me/prasad/study_app/ui/SessionRecapActivity.java"), lang: "java")
+#raw(read("../app/src/main/java/me/prasad/study_app/ui/SessionRecapActivity.java"), lang: "java")
 
 == Layout Declaration
-#raw(read("app/src/main/res/layout/activity_session_recap.xml"), lang: "xml")
+#raw(read("../app/src/main/res/layout/activity_session_recap.xml"), lang: "xml")

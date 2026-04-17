@@ -18,7 +18,7 @@
           8pt,
           font: "Inter",
           fill: secondary-color,
-        )[Student Name]],
+        )[Sandeep Prasad]],
       )
       v(-5pt)
       line(length: 100%, stroke: 0.5pt + accent-color)
@@ -100,7 +100,8 @@
           #grid(
             columns: (1fr, 2fr),
             row-gutter: 10pt,
-            text(8pt, fill: secondary-color)[STUDENT], text(9pt, weight: "semibold")[Student Name],
+            text(8pt, fill: secondary-color)[STUDENT], text(9pt, weight: "semibold")[Sandeep Prasad],
+            text(8pt, fill: secondary-color)[ERN], text(9pt, weight: "semibold")[240905050085],
             text(8pt, fill: secondary-color)[ALA - I], text(9pt, weight: "semibold")[Basics of Android Architecture],
             text(8pt, fill: secondary-color)[REPOSITORY],
             link("https://github.com/fizzflip/rivi")[#text(9pt, weight: "semibold")[github.com/fizzflip/rivi]],
