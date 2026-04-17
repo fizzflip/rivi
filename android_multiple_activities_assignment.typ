@@ -1,56 +1,58 @@
-#set document(
-  title: "Developing Multiple Android Activities",
-  author: "Student Name",
-)
+#set document(title: "Developing Multiple Android Activities", author: "Student Name")
+
+// --- DESIGN SYSTEM CONFIGURATION ---
+#let primary-color = rgb("000000")
+#let secondary-color = rgb("444444")
+#let accent-color = rgb("EEEEEE")
+#let code-bg = rgb("F7F9FC")
 
 #set page(
   paper: "a4",
-  margin: (left: 25mm, right: 25mm, top: 35mm, bottom: 35mm),
+  margin: (left: 20mm, right: 20mm, top: 30mm, bottom: 30mm),
   header: context {
     if counter(page).get().first() > 1 {
       grid(
         columns: (1fr, 1fr),
-        text(
-          8pt,
-          font: "Inter",
-          fill: rgb("666666"),
-        )[Multiple Android Activities],
+        text(8pt, font: "Inter", fill: secondary-color)[Multiple Android Activities],
         align(right)[#text(
           8pt,
           font: "Inter",
-          fill: rgb("666666"),
+          fill: secondary-color,
         )[Student Name]],
       )
       v(-5pt)
-      line(length: 100%, stroke: 0.5pt + rgb("EEEEEE"))
+      line(length: 100%, stroke: 0.5pt + accent-color)
     }
   },
   footer: context {
-    line(length: 100%, stroke: 0.5pt + rgb("EEEEEE"))
-    v(5pt)
-    align(center)[#text(
-      8pt,
-      font: "Inter",
-      fill: rgb("666666"),
-    )[Page #counter(page).display("1")]]
+    if counter(page).get().first() > 1 {
+      line(length: 100%, stroke: 0.5pt + accent-color)
+      v(5pt)
+      align(center)[#text(
+        8pt,
+        font: "Inter",
+        fill: secondary-color,
+      )[Page #counter(page).display("1")]]
+    }
   },
 )
 
-#set text(font: "Inter", size: 10.5pt, fill: rgb("333333"))
-#set par(leading: 0.7em)
-#set heading(numbering: "I.")
+#set text(font: "Inter", size: 10pt, fill: rgb("1A1A1A"))
+#set par(leading: 0.6em, justify: true)
+#set heading(numbering: (..n) => [3.#n.pos().map(str).join(".")])
 
-// Clean, sleek, app-like headings
+// --- COMPONENT STYLING ---
 #show heading.where(level: 1): it => block(
   width: 100%,
-  stroke: (bottom: 1pt + rgb("EEEEEE")),
+  stroke: (bottom: 1pt + accent-color),
   inset: (bottom: 0.5em),
-  below: 1em,
+  below: 1.2em,
+  above: 2em,
   text(
     font: "New Computer Modern",
-    fill: rgb("000000"),
+    fill: primary-color,
     weight: "regular",
-    size: 18pt,
+    size: 20pt,
     it,
   ),
 )
@@ -58,182 +60,144 @@
 #show heading.where(level: 2): it => block(
   below: 0.8em,
   above: 1.5em,
-  text(font: "Inter", fill: rgb("111111"), weight: "semibold", size: 12pt, it),
+  text(font: "Inter", fill: primary-color, weight: "semibold", size: 12pt, it),
 )
 
-// Code block styling
 #show raw.where(block: true): it => block(
-  fill: rgb("F7F9FC"),
-  stroke: 1pt + rgb("EEEEEE"),
-  inset: 15pt,
-  radius: 8pt,
+  fill: code-bg,
+  stroke: 1pt + accent-color,
+  inset: 12pt,
+  radius: 4pt,
   width: 100%,
   breakable: true,
   {
-    set text(size: 8pt, fill: rgb("333333"))
+    set text(size: 7.5pt, font: "Fira Code", fill: rgb("333333"))
     it
   },
 )
 
-// Title Area
-#align(center)[
-  #v(30pt)
-  #text(
-    36pt,
-    font: "New Computer Modern",
-    fill: black,
-    weight: "regular",
-  )[Multiple Android Activities]
-  #v(40pt)
+// --- COVER PAGE ---
+#page(header: none, footer: none)[
+  #v(15%)
+  #align(center)[
+    #text(12pt, weight: "light", tracking: 2pt)[ANDROID DEVELOPMENT SERIES]
+    #v(10pt)
+    #line(length: 40%, stroke: 0.5pt + secondary-color)
+    #v(20pt)
+    #text(42pt, font: "New Computer Modern", weight: "regular")[Multiple \ Android Activities]
+    #v(10pt)
+    #text(14pt, style: "italic", fill: secondary-color)[Engineering Intent-Based Navigation and Lifecycle Management]
+    #v(40pt)
+
+    #block(
+      width: 60%,
+      stroke: 0.5pt + accent-color,
+      inset: 20pt,
+      radius: 4pt,
+      [
+        #align(left)[
+          #grid(
+            columns: (1fr, 2fr),
+            row-gutter: 10pt,
+            text(8pt, fill: secondary-color)[STUDENT], text(9pt, weight: "semibold")[Student Name],
+            text(8pt, fill: secondary-color)[ASSIGNMENT],
+            text(9pt, weight: "semibold")[03: Multi-Activity Architecture],
+          )
+        ]
+      ],
+    )
+  ]
 ]
+
+#pagebreak()
 
 = Application Architecture Context
 
 - *Contextual Application:* Rivi (Minimalist Academic Microlearning)
 - *Architectural Driver:* Model-View-ViewModel (MVVM) Design Pattern
-- *Core Features Elaborated:* Real-world educational applications heavily rely on segregating user workflows into distinct spatial sandboxes. By distributing the user-flow across multiple `Activities`, the application naturally inherits built-in back-stack management handled seamlessly by the OS. In this scope, we focus on engineering the explicit mapping between a global navigation dashboard surface and a hyper-focused study interface, bridging them through the strategic dispatch of `Intents` bearing bundled payload data (such as primitive subject identification keys).
+- *Core Features Elaborated:* Real-world educational applications heavily rely on segregating user workflows into distinct spatial sandboxes. By distributing the user-flow across multiple `Activities`, the application naturally inherits built-in back-stack management handled by the Android OS.
 
-= Activity Phase 1: Dashboard Interface (MainActivity)
+In Rivi, we focus on engineering the explicit mapping between a global navigation dashboard and hyper-focused functional interfaces, bridging them through the strategic dispatch of `Intents` bearing bundled payload data (such as primitive subject identification keys).
 
-The `MainActivity` operates as the singular entry gateway (defined as `ACTION_MAIN` and `CATEGORY_LAUNCHER` in the manifest). It is structurally responsible for orchestrating global user progression.
+= Core Blueprint: AndroidManifest.xml
 
-- *Functional Elaboration:* The primary operational logic within this activity involves establishing an observable connection to the local Room database via its ViewModel. It retrieves the saved subject matrices asynchronously on background IO threads to prevent UI-stutter, rendering them via a customized `RecyclerView` layout manager. When a user wishes to interact with a specific domain, the `MainActivity` intercepts the `onClick` event and synthesizes an `Explicit Intent`. It attaches the targeted `SubjectID` to the intent's extras bundle, subsequently initiating the hand-off procedure via `startActivity()`.
+The manifest serves as the directory for all entry points. Each activity must be registered here to be accessible via Intent dispatching.
+
+#v(10pt)
+#raw(read("app/src/main/AndroidManifest.xml"), lang: "xml")
+
+#pagebreak()
+= Activity 1: Dashboard (MainActivity)
+
+The `MainActivity` operates as the primary entry gateway. It is responsible for orchestrating global user progression by fetching subjects and allowing navigation to study sessions or management views.
+
+- *Functional Logic:* It observes a Room database via a ViewModel. When a category is clicked, it synthesizes an `Explicit Intent`, attaches a `SubjectID`, and invokes `startActivity()`.
 
 #align(center)[
-  #v(10pt)
-  #box(
-    width: 75%,
-    height: 380pt,
-    clip: true,
-    radius: 8pt,
-    stroke: 1pt + rgb("DDDDDD"),
-    [
-      #image("rivi_screenshot.jpg", width: 100%, fit: "cover")
-    ],
-  )
-  #v(10pt)
-  #text(
-    8pt,
-    fill: rgb("888888"),
-    style: "italic",
-  )[Figure 1: Cropped View of the Dashboard Operations]
+  #box(width: 50%, clip: true, radius: 8pt, stroke: 1pt + accent-color, [
+    #image("rivi_screenshot.jpg", width: 100%)
+  ])
 ]
 
+== Implementation Code
+#raw(read("app/src/main/java/me/prasad/study_app/MainActivity.java"), lang: "java")
+
+== Layout Declaration
+#raw(read("app/src/main/res/layout/activity_main.xml"), lang: "xml")
+
 #pagebreak()
-= Activity Phase 2: Active Recall Protocol (StudySessionActivity)
+= Activity 2: Flashcard Study (StudySessionActivity)
 
-The `StudySessionActivity` diverges significantly from the dashboard format. It abandons lists and structural navigation mechanics, embracing a highly constrained, distraction-free flashcard interface that fills the entire viewport matrix.
+This activity facilitates the core "Active Recall" protocol. It abandons lists for a high-intensity, distraction-free card interface.
 
-- *Functional Elaboration:* Upon initialization (`onCreate()`), this activity instantly unpacks the incoming `Intent` bundle to securely extract the targeted `SubjectID`. Instead of loading all data globally, it exclusively queries the persistence layer for flashcards localized entirely into the "Smart 5" daily review limits. It then manages the localized feedback loops—capturing user metric inputs (Again, Hard, Good, Easy) and dispatching them structurally back through the ViewModel to update the specific Spaced Repetition (SM-2) scheduling integers within the local store.
+- *Functional Logic:* It extracts the `SubjectID` from the incoming intent, queries the specific flashcard set, and manages user feedback (Again, Hard, Good, Easy) back to the SR algorithm.
 
 #align(center)[
-  #v(10pt)
-  #box(
-    width: 75%,
-    height: 380pt,
-    clip: true,
-    radius: 8pt,
-    stroke: 1pt + rgb("DDDDDD"),
-    [
-      #image("rivi_study_screenshot.jpg", width: 100%, fit: "cover")
-    ],
-  )
-  #v(10pt)
-  #text(
-    8pt,
-    fill: rgb("888888"),
-    style: "italic",
-  )[Figure 2: Cropped View of the Distraction-Free Flashcard Mode]
+  #box(width: 50%, clip: true, radius: 8pt, stroke: 1pt + accent-color, [
+    #image("rivi_study_screenshot.jpg", width: 100%)
+  ])
 ]
 
+== Implementation Code
+#raw(read("app/src/main/java/me/prasad/study_app/ui/StudySessionActivity.java"), lang: "java")
+
+== Layout Declaration
+#raw(read("app/src/main/res/layout/activity_study_session.xml"), lang: "xml")
+
 #pagebreak()
-= Activity Phase 3: Content Administration (CardManagementActivity)
+= Activity 3: Administration (CardManagementActivity)
 
-The `CardManagementActivity` is the operational interface specifically crafted to facilitate Create, Read, Update, and Delete (CRUD) dynamics for the application's core knowledge graphs.
+Provides CRUD operations for the knowledge graph. It allows users to modify or inject new flashcards into the database.
 
-- *Functional Elaboration:* This component is instantiated via an `Intent` that carries necessary hierarchical parameters (i.e. to which Subject these flashcards belong). It provisions a scrolling linear layout mapped inversely to the database via Room DAOs. It supports real-time form inputs, allowing users to modify existing cards or inject new learning material directly into the local SQLite persistence layer which instantly synchronizes with the `MainActivity` state upon finish.
+- *Functional Logic:* Connects to the Room DAO layer directly. It uses a RecyclerView to list existing cards and provides a floating action button for additions.
 
 #align(center)[
-  #v(10pt)
-  #box(
-    width: 75%,
-    height: 380pt,
-    clip: true,
-    radius: 8pt,
-    stroke: 1pt + rgb("DDDDDD"),
-    [
-      #image("rivi_card_manage_screenshot.jpg", width: 100%, fit: "cover")
-    ],
-  )
-  #v(10pt)
-  #text(
-    8pt,
-    fill: rgb("888888"),
-    style: "italic",
-  )[Figure 3: Cropped View of the Card Management Matrix]
+  #box(width: 50%, clip: true, radius: 8pt, stroke: 1pt + accent-color, [
+    #image("rivi_card_manage_screenshot.jpg", width: 100%)
+  ])
 ]
 
+== Implementation Code
+#raw(read("app/src/main/java/me/prasad/study_app/ui/CardManagementActivity.java"), lang: "java")
+
+== Layout Declaration
+#raw(read("app/src/main/res/layout/activity_card_management.xml"), lang: "xml")
+
 #pagebreak()
-= Activity Phase 4: Session Analytics (SessionRecapActivity)
+= Activity 4: Session Analytics (SessionRecapActivity)
 
-Following the completion of an active recall phase, the navigation flow inherently delegates control dynamically to the `SessionRecapActivity`.
+Bridges the study session and the dashboard, providing positive reinforcement through data visualization.
 
-- *Functional Elaboration:* Instead of abruptly terminating user engagement, this activity bridges the conclusion of studying and returning to the dashboard. The `StudySessionActivity` invokes this via an explicit parameter launch, passing session accuracy metrics inside the Intent bundle. The `SessionRecapActivity` extracts these parameters formatting them into elegant progress telemetry (e.g. studying intensity, percentage accuracy) reinforcing learning behaviors before safely popping the activity stack and routing the user safely back home.
+- *Functional Logic:* Receives accuracy metrics via Intent extras and renders them into progress charts before allowing the user to return home.
 
 #align(center)[
-  #v(10pt)
-  #box(
-    width: 75%,
-    height: 380pt,
-    clip: true,
-    radius: 8pt,
-    stroke: 1pt + rgb("DDDDDD"),
-    [
-      #image("rivi_session_recap_screenshot.jpg", width: 100%, fit: "cover")
-    ],
-  )
-  #v(10pt)
-  #text(
-    8pt,
-    fill: rgb("888888"),
-    style: "italic",
-  )[Figure 4: Cropped View of the Analytics Summary]
+  #box(width: 50%, clip: true, radius: 8pt, stroke: 1pt + accent-color, [
+    #image("rivi_session_recap_screenshot.jpg", width: 100%)
+  ])
 ]
 
-#pagebreak()
-= Artifact 1: Core Dashboard Implementation
+== Implementation Code
+#raw(read("app/src/main/java/me/prasad/study_app/ui/SessionRecapActivity.java"), lang: "java")
 
-Below is the structured Java architecture that bounds the UI logic for `MainActivity.java`.
-
-#raw(
-  read("app/src/main/java/me/prasad/study_app/MainActivity.java"),
-  lang: "java",
-)
-
-#pagebreak()
-= Artifact 2: Active Recall Logic Implementation
-
-Below is the structured Java architecture encompassing the UI operations within `StudySessionActivity.java`.
-
-#raw(
-  read("app/src/main/java/me/prasad/study_app/ui/StudySessionActivity.java"),
-  lang: "java",
-)
-
-#pagebreak()
-= Artifact 3: Card Administration Flow
-Below is the Java architecture defining the `CardManagementActivity`.
-
-#raw(
-  read("app/src/main/java/me/prasad/study_app/ui/CardManagementActivity.java"),
-  lang: "java",
-)
-
-#pagebreak()
-= Artifact 4: Session Analytics Handler
-Below is the Java implementation controlling the `SessionRecapActivity` lifecycle.
-
-#raw(
-  read("app/src/main/java/me/prasad/study_app/ui/SessionRecapActivity.java"),
-  lang: "java",
-)
+== Layout Declaration
+#raw(read("app/src/main/res/layout/activity_session_recap.xml"), lang: "xml")
