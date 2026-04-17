@@ -27,6 +27,10 @@
             android:name=".ui.CardManagementActivity"
             android:exported="false"
             android:theme="@style/Theme.Rivi" />
+        <activity
+            android:name=".ui.SessionRecapActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Rivi" />
     </application>
 
 </manifest>

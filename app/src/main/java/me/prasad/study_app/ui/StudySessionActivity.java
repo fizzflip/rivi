@@ -1,5 +1,6 @@
 package me.prasad.study_app.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -96,7 +97,8 @@ public class StudySessionActivity extends AppCompatActivity {
 
         flashcardViewModel.getIsSessionComplete().observe(this, isComplete -> {
             if (isComplete) {
-                Toast.makeText(this, "Session Complete!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, SessionRecapActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
