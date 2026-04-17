@@ -83,48 +83,43 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_again"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.Rivi.Button.Outline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Again"
-            android:textAllCaps="false"
             android:textColor="#F44336"
             app:strokeColor="#F44336" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_hard"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.Rivi.Button.Outline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="Hard"
-            android:textAllCaps="false"
             android:textColor="#FF9800"
             app:strokeColor="#FF9800" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_good"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.Rivi.Button.Solid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="Good"
-            android:textAllCaps="false"
-            android:textColor="#4CAF50"
-            app:strokeColor="#4CAF50" />
+            app:backgroundTint="#4CAF50" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_easy"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.Rivi.Button.Outline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="Easy"
-            android:textAllCaps="false"
             android:textColor="#2196F3"
             app:strokeColor="#2196F3" />
 

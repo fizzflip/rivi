@@ -44,4 +44,32 @@
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:lineSpacingExtra">4sp</item>
     </style>
+
+    <!-- Navigation Icon Style -->
+    <style name="Widget.Rivi.IconButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:padding">12dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="iconTint">@color/rivi_primary</item>
+    </style>
+
+    <style name="Widget.Rivi.Button.Solid" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/bg_button_solid</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.Rivi.Button.Outline" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:background">@drawable/bg_button_outline</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/rivi_primary</item>
+        <item name="strokeColor">@color/rivi_stroke</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 </resources>

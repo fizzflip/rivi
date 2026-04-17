@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -88,8 +90,9 @@ public class MainActivity extends AppCompatActivity {
     private void setupRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recycler_subjects);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        
-        // Pass ViewModel to adapter to fetch due counts
+
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_slide_up);
+        recyclerView.setLayoutAnimation(animation);
         adapter = new SubjectAdapter(new ViewModelProvider(this).get(SubjectViewModel.class), this);
         recyclerView.setAdapter(adapter);
 
