@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import me.prasad.study_app.data.entity.Subject;
@@ -47,5 +49,13 @@ public class SubjectViewModel extends AndroidViewModel {
 
     public void delete(Subject subject) {
         repository.deleteSubject(subject);
+    }
+
+    public void exportSubject(int subjectId, OutputStream outputStream) {
+        repository.exportSubject(subjectId, outputStream);
+    }
+
+    public void importSubject(InputStream inputStream, Runnable onComplete) {
+        repository.importSubject(inputStream, onComplete);
     }
 }

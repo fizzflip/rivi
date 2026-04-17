@@ -33,6 +33,9 @@ public interface RiviDao {
     @Query("SELECT * FROM subjects WHERE subjectId = :subjectId")
     LiveData<Subject> getSubjectById(int subjectId);
 
+    @Query("SELECT * FROM subjects WHERE subjectId = :subjectId")
+    Subject getSubjectByIdSync(int subjectId);
+
     @Query("SELECT COUNT(*) FROM flashcards WHERE subjectId = :subjectId AND nextReviewDate <= :todayTimestamp")
     LiveData<Integer> getDueCountForSubject(int subjectId, long todayTimestamp);
 

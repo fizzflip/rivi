@@ -4,10 +4,19 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
 import me.prasad.study_app.data.RiviDatabase;
 import me.prasad.study_app.data.dao.RiviDao;
+import me.prasad.study_app.data.dto.FlashcardDto;
+import me.prasad.study_app.data.dto.SubjectExportDto;
 import me.prasad.study_app.data.entity.Flashcard;
 import me.prasad.study_app.data.entity.Subject;
 
@@ -19,6 +28,7 @@ public class RiviRepository {
 
     private final RiviDao riviDao;
     private final LiveData<List<Subject>> allSubjects;
+    private final Gson gson = new Gson();
 
     public RiviRepository(Application application) {
         RiviDatabase db = RiviDatabase.getDatabase(application);
@@ -92,5 +102,50 @@ public class RiviRepository {
 
     public List<Flashcard> getAllCardsForCram(int subjectId) {
         return riviDao.getAllCardsForCram(subjectId);
+    }
+
+    // --- Export / Import ---
+
+    public void exportSubject(int subjectId, OutputStream outputStream) {
+        RiviDatabase.databaseWriteExecutor.execute(() -> {
+            try {
+                Subject subject = riviDao.getSubjectByIdSync(subjectId);
+                List<Flashcard> cards = riviDao.getAllCardsForCram(subjectId);
+
+                List<FlashcardDto> dtos = new ArrayList<>();
+                for (Flashcard card : cards) {
+                    dtos.add(new FlashcardDto(card.getQuestion(), card.getAnswer()));
+                }
+
+                SubjectExportDto exportDto = new SubjectExportDto(subject.getName(), dtos);
+                String json = gson.toJson(exportDto);
+
+                try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8)) {
+                    writer.write(json);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void importSubject(InputStream inputStream, Runnable onComplete) {
+        RiviDatabase.databaseWriteExecutor.execute(() -> {
+            try (InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
+                SubjectExportDto importDto = gson.fromJson(reader, SubjectExportDto.class);
+                if (importDto != null) {
+                    Subject subject = new Subject(importDto.subjectName, System.currentTimeMillis() + 604800000L, 0);
+                    long subjectId = riviDao.insertSubject(subject);
+
+                    for (FlashcardDto cardDto : importDto.flashcards) {
+                        Flashcard card = new Flashcard((int) subjectId, cardDto.question, cardDto.answer, System.currentTimeMillis(), 0, 2.5f);
+                        riviDao.insertFlashcard(card);
+                    }
+                }
+                if (onComplete != null) onComplete.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
