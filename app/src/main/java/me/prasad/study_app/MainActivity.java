@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import me.prasad.study_app.data.entity.Subject;
+import me.prasad.study_app.ui.StudySessionActivity;
 import me.prasad.study_app.ui.adapter.SubjectAdapter;
 import me.prasad.study_app.viewmodel.SubjectViewModel;
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SubjectViewModel viewModel;
     private SubjectAdapter adapter;
-    private Calendar calendar = Calendar.getInstance();
+    private final Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setupRecyclerView();
 
         viewModel = new ViewModelProvider(this).get(SubjectViewModel.class);
-        viewModel.getAllSubjects().observe(this, subjects -> {
-            adapter.submitList(subjects);
-        });
+        viewModel.getAllSubjects().observe(this, subjects -> adapter.submitList(subjects));
 
         ExtendedFloatingActionButton fab = findViewById(R.id.fab_add_subject);
         fab.setOnClickListener(v -> showAddSubjectDialog());
@@ -55,21 +54,21 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton btnSave = view.findViewById(R.id.btn_save);
         MaterialButton btnCancel = view.findViewById(R.id.btn_cancel);
 
-        AlertDialog dialog = new AlertDialog.Builder(this, R.style.Theme_MaterialComponents_DayNight_Dialog_MinWidth)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(view)
                 .create();
 
-        dateInput.setOnClickListener(v -> {
-            new DatePickerDialog(this, (view1, year, month, dayOfMonth) -> {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
-                dateInput.setText(sdf.format(calendar.getTime()));
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
-        });
+        dateInput.setOnClickListener(v -> new DatePickerDialog(this, (view1, year, month, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
+            dateInput.setText(sdf.format(calendar.getTime()));
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show());
 
         btnSave.setOnClickListener(v -> {
+            if (nameInput.getText() == null || dateInput.getText() == null) return;
+
             String name = nameInput.getText().toString().trim();
             if (name.isEmpty() || dateInput.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
